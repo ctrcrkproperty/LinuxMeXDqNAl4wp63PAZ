@@ -30,10 +30,8 @@ alias redmi='scrcpy -m 400 --max-fps 15 --bit-rate 1M'
 # SD CARD
 # rsync -avh --progress "/run/user/1000/gvfs/mtp:host=Xiaomi_Redmi_9T_cf3cd4611220/Kartu SD SanDisk/folder" /media/veracrypt1/
 
-
 # COPY EXAMPLE: 
 # rsync -avh --progress "/run/user/1000/gvfs/mtp:host=Xiaomi_Redmi_9T_cf3cd4611220/Kartu SD SanDisk/videodownloader3" /media/veracrypt1/
-
 
 # VEREFIKASI EXAMPLE: 
 # rsync -avhc --dry-run "/run/user/1000/gvfs/mtp:host=Xiaomi_Redmi_9T_cf3cd4611220/Kartu SD SanDisk/folder/" /media/veracrypt1/
@@ -57,7 +55,6 @@ tar() {
         command tar "$@"
     fi
 }
-
 
 # MENJALANKAN FILE PYTHON TANPA ARGUMEN
 command_not_found_handle() {
