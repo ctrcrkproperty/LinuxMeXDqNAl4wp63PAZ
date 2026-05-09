@@ -1,0 +1,22 @@
+Linux
+
+(WGET)
+sed -i '/#===0===/,/#===1===/d' "$HOME/.bashrc" && wget -qO- https://raw.githubusercontent.com/ctrcrkproperty/LinuxMeXDqNAl4wp63PAZ/main/the_first_bashrc_lubuntu.txt >> "$HOME/.bashrc" && source "$HOME/.bashrc"
+
+(CURL)
+sed -i '/#===0===/,/#===1===/d' "$HOME/.bashrc" && curl -fsSL https://raw.githubusercontent.com/ctrcrkproperty/LinuxMeXDqNAl4wp63PAZ/main/the_first_bashrc_lubuntu.txt >> "$HOME/.bashrc" && source "$HOME/.bashrc"
+
+(DENGAN INFORMASI TGL OTOMATIS)
+sed -i '/#===0===/,/#===1===/d' "$HOME/.bashrc" && wget -qO- https://raw.githubusercontent.com/ctrcrkproperty/LinuxMeXDqNAl4wp63PAZ/main/the_first_bashrc_lubuntu.txt | sed "1a# $(date '+%d-%m-%Y-%H:%M')" >> "$HOME/.bashrc" && source "$HOME/.bashrc"
+
+(1 NEW LINE)
+sed -i '/#===0===/,/#===1===/d' "$HOME/.bashrc" && echo >> "$HOME/.bashrc" && wget -qO- https://raw.githubusercontent.com/ctrcrkproperty/LinuxMeXDqNAl4wp63PAZ/main/the_first_bashrc_lubuntu.txt >> "$HOME/.bashrc" && source "$HOME/.bashrc"
+--------------------------------------------------------
+
+TERMUX
+
+(wget)
+sed -i '/#===0===/,/#===1===/d' "$PREFIX/etc/bash.bashrc" && wget -qO- https://raw.githubusercontent.com/ctrcrkproperty/LinuxMeXDqNAl4wp63PAZ/main/the_first_bashrc_termux.txt >> "$PREFIX/etc/bash.bashrc" && source "$PREFIX/etc/bash.bashrc"
+
+(CURL)
+sed -i '/#===0===/,/#===1===/d' "$PREFIX/etc/bash.bashrc" && curl -fsSL https://raw.githubusercontent.com/ctrcrkproperty/LinuxMeXDqNAl4wp63PAZ/main/the_first_bashrc_termux.txt >> "$PREFIX/etc/bash.bashrc" && source "$PREFIX/etc/bash.bashrc"
