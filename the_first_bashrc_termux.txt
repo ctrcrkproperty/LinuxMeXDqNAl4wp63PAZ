@@ -1,0 +1,48 @@
+#===0===
+# DEFAULT EXTERNAL STORAGE
+alias jmswy='cd $(realpath /$EXTERNAL_STORAGE)'
+
+# QUICK
+alias cls='clear'
+alias py='python'
+alias clsls='clear && ls'
+
+# CD SDCARD
+alias sdcard='cd "$(df | grep -E "/storage/.+" | grep -v "/storage/emulated" | awk "{print \$NF}" | head -n 1)"'
+
+# PANDUAN TAR.GZ
+alias targz='echo -e "Cara Membuat tar.gz:\n  tar -cvzf namafile.tar.gz folder_atau_file\n\nCara Ekstrak tar.gz:\n  tar -xvzf namafile.tar.gz"'
+
+# JALANKAN PROGRAM C
+c() {
+    ./"$1"
+}
+
+# FUNGSI UNTUK TAR.GZ CUSTOM
+tar() {
+    if [ "$1" = "-m" ]; then
+        # Membuat tar.gz
+        filename="$2.tar.gz"
+        folder="$2"
+        command tar -czvf "$filename" "$folder"
+    elif [ "$1" = "-e" ]; then
+        # Ekstrak tar.gz
+        file="$2"
+        command tar -xzvf "$file"
+    else
+        # fallback ke tar asli
+        command tar "$@"
+    fi
+}
+
+
+# MENJALANKAN FILE PYTHON TANPA ARGUMEN
+command_not_found_handle() {
+    if [[ "$1" == *.py && -f "$1" ]]; then
+        python "$@"
+    else
+        echo "command not found: $1"
+        return 127
+    fi
+}
+#===1===
