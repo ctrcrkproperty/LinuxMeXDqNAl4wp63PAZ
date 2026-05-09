@@ -1,5 +1,5 @@
 #===0===
-# CLI JMS COSTUM
+# 9 Mei 2026
 alias cls='clear'
 alias clsls='clear && ls'
 alias python='python3'
