@@ -1,5 +1,6 @@
 #===0===
 # 9 Mei 2026
+
 alias cls='clear'
 alias clsls='clear && ls'
 alias python='python3'
@@ -71,4 +72,5 @@ command_not_found_handle() {
 # alias updatebashrc='source ~/.bashrc'
 # alias tanya='ollama run tinydolphin:1.1b'
 # alias targz='echo -e "Cara Membuat file tar.gz:\n  tar -czvf namafile.tar.gz folder/\n\nCara Ekstrak file tar.gz:\n  tar -xzvf namafile.tar.gz"'
+
 #===1===
