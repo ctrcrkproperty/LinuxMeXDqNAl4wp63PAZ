@@ -1,0 +1,75 @@
+# CLI JMS COSTUM
+alias cls='clear'
+alias clsls='clear && ls'
+alias python='python3'
+alias py='python3'
+
+# MENAMBAHKAN /USR/LOCAL/BIN KE PATH AGAR PROGRAM DI FOLDER ITU BISA DIJALANKAN LANGSUNG DARI TERMINAL
+# export PATH=$PATH:/usr/local/bin
+
+# ENV PYTHON
+alias myenv='source ~/myenv/bin/activate'
+alias envmy='deactivate'
+
+# PENANGANAN INSTALASI PIP PAKET BESAR, TMP ROOT DIPINDAHKAN KE DIREKTORI USER
+export TMPDIR="$HOME/.tmp_install"
+export TEMP="$HOME/.tmp_install"
+export TMP="$HOME/.tmp_install"
+
+# DNS CLOUDFLRE
+alias mydns='warp-cli connect'
+alias dnsmy='warp-cli disconnect'
+alias redmi='scrcpy -m 400 --max-fps 15 --bit-rate 1M'
+
+# CEK: 
+# ls /run/user/1000/gvfs/
+
+# INTERNAL
+# rsync -avh --progress "/run/user/1000/gvfs/mtp:host=Xiaomi_Redmi_9T_cf3cd4611220/Penyimpanan bersama internal/folder" /media/veracrypt1/
+
+# SD CARD
+# rsync -avh --progress "/run/user/1000/gvfs/mtp:host=Xiaomi_Redmi_9T_cf3cd4611220/Kartu SD SanDisk/folder" /media/veracrypt1/
+
+
+# COPY EXAMPLE: 
+# rsync -avh --progress "/run/user/1000/gvfs/mtp:host=Xiaomi_Redmi_9T_cf3cd4611220/Kartu SD SanDisk/videodownloader3" /media/veracrypt1/
+
+
+# VEREFIKASI EXAMPLE: 
+# rsync -avhc --dry-run "/run/user/1000/gvfs/mtp:host=Xiaomi_Redmi_9T_cf3cd4611220/Kartu SD SanDisk/folder/" /media/veracrypt1/
+
+# HAPUS TRASH PERMANEN
+alias cleartrash='rm -rf ~/.local/share/Trash/files/* ~/.local/share/Trash/info/*'
+
+# FUNGSI UNTUK TAR.GZ CUSTOM
+tar() {
+    if [ "$1" = "-m" ]; then
+        # Membuat tar.gz
+        filename="$2.tar.gz"
+        folder="$2"
+        command tar -czvf "$filename" "$folder"
+    elif [ "$1" = "-e" ]; then
+        # Ekstrak tar.gz
+        file="$2"
+        command tar -xzvf "$file"
+    else
+        # fallback ke tar asli
+        command tar "$@"
+    fi
+}
+
+
+# MENJALANKAN FILE PYTHON TANPA ARGUMEN
+command_not_found_handle() {
+    if [[ "$1" == *.py && -f "$1" ]]; then
+        python "$@"
+    else
+        echo "command not found: $1"
+        return 127
+    fi
+}
+
+# TIDAK PENTING
+# alias updatebashrc='source ~/.bashrc'
+# alias tanya='ollama run tinydolphin:1.1b'
+# alias targz='echo -e "Cara Membuat file tar.gz:\n  tar -czvf namafile.tar.gz folder/\n\nCara Ekstrak file tar.gz:\n  tar -xzvf namafile.tar.gz"'
