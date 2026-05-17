@@ -1,5 +1,5 @@
 #===0===
-# 10 Mei 2026
+# 17 Mei 2026
 
 alias cls='clear'
 alias clsls='clear && ls'
@@ -21,7 +21,7 @@ export TMP="$HOME/.tmp_install"
 # DNS CLOUDFLRE
 alias mydns='warp-cli connect'
 alias dnsmy='warp-cli disconnect'
-alias redmi='scrcpy -m 400 --max-fps 15 --bit-rate 1M'
+alias redmi='scrcpy -m 400 --max-fps 15 --bit-rate 500M'
 
 #SHH
 alias myssh='systemctl status ssh && echo && hostname -I'
@@ -50,12 +50,12 @@ alias cleartrash='rm -rf ~/.local/share/Trash/files/* ~/.local/share/Trash/info/
 
 # FUNGSI UNTUK TAR.GZ CUSTOM
 tar() {
-    if [ "$1" = "-m" ]; then
+    if [ "$1" = "-c" ]; then
         # Membuat tar.gz
         filename="$2.tar.gz"
         folder="$2"
         command tar -czvf "$filename" "$folder"
-    elif [ "$1" = "-e" ]; then
+    elif [ "$1" = "-x" ]; then
         # Ekstrak tar.gz
         file="$2"
         command tar -xzvf "$file"
@@ -75,8 +75,137 @@ command_not_found_handle() {
     fi
 }
 
+# ADB
+adbwifi() {
+
+echo ""
+echo "======================================"
+echo "   ADB Wireless Debugging (Auto Retry)"
+echo "======================================"
+echo ""
+
+IP="192.168.1.65"
+
+validate_number() {
+  local input=$1
+  local length=$2
+
+  [[ "$input" =~ ^[0-9]+$ ]] && [ "${#input}" -eq "$length" ]
+}
+
+# =========================
+# INPUT PAIR PORT
+# =========================
+while true; do
+  echo ""
+  read -p "[1] Masukkan Pairing Port (5 digit): " PAIR_PORT
+
+  if validate_number "$PAIR_PORT" 5; then
+    break
+  else
+    echo "❌ Tidak valid! Harus angka 5 digit."
+    echo ""
+  fi
+done
+
+# =========================
+# INPUT PAIR CODE
+# =========================
+while true; do
+  read -p "[2] Masukkan Code WIFI (6 digit): " PAIR_CODE
+
+  if validate_number "$PAIR_CODE" 6; then
+    break
+  else
+    echo "❌ Tidak valid! Harus angka 6 digit."
+    echo ""
+  fi
+done
+
+echo ""
+echo "Menjalankan pairing..."
+echo "--------------------------------------"
+
+while true; do
+  OUTPUT=$(adb pair "$IP:$PAIR_PORT" <<< "$PAIR_CODE" 2>&1)
+  echo "$OUTPUT"
+  echo ""
+
+  if echo "$OUTPUT" | grep -q "Successfully paired"; then
+    echo "✅ Pairing berhasil!"
+    echo ""
+    break
+  else
+    echo "❌ Pairing gagal, ulang input..."
+    echo ""
+
+    while true; do
+      read -p "[1] Masukkan Pairing Port (5 digit): " PAIR_PORT
+      validate_number "$PAIR_PORT" 5 && break
+      echo "❌ Tidak valid!"
+      echo ""
+    done
+
+    while true; do
+      read -p "[2] Masukkan Code WIFI (6 digit): " PAIR_CODE
+      validate_number "$PAIR_CODE" 6 && break
+      echo "❌ Tidak valid!"
+      echo ""
+    done
+
+    echo ""
+  fi
+done
+
+echo "======================================"
+echo ""
+
+# =========================
+# CONNECT LOOP
+# =========================
+while true; do
+  echo ""
+
+  while true; do
+    read -p "[3] Masukkan Connect Port (5 digit): " CONNECT_PORT
+    validate_number "$CONNECT_PORT" 5 && break
+    echo "❌ Tidak valid!"
+    echo ""
+  done
+
+  echo ""
+  echo "Menjalankan connect..."
+  echo "--------------------------------------"
+
+  OUTPUT=$(adb connect "$IP:$CONNECT_PORT" 2>&1)
+  echo "$OUTPUT"
+  echo ""
+
+  if echo "$OUTPUT" | grep -q "connected to"; then
+    echo "✅ Connect berhasil!"
+    echo ""
+    break
+  else
+    echo "❌ Connect gagal, ulangi..."
+    echo ""
+  fi
+done
+
+echo "======================================"
+echo ""
+echo "Device terhubung:"
+adb devices
+echo ""
+echo "Selesai"
+echo ""
+
+}
+
+
 # TIDAK PENTING
 # alias updatebashrc='source ~/.bashrc'
 # alias tanya='ollama run tinydolphin:1.1b'
 # alias targz='echo -e "Cara Membuat file tar.gz:\n  tar -czvf namafile.tar.gz folder/\n\nCara Ekstrak file tar.gz:\n  tar -xzvf namafile.tar.gz"'
+
 #===1===
+
